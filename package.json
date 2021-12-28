@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
-	"version": "0.12.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"name": "obsidian-tomorrows-daily-note",
+	"version": "1.0.0",
+	"description": "An obsidian plugin that creates tomorrows daily note for preemtive planning.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
