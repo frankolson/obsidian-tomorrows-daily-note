@@ -1,6 +1,8 @@
 # Tomorrow's Daily Note
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/frankolson/obsidian-tomorrows-daily-note?style=for-the-badge&sort=semver)
+
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/frankolson/obsidian-tomorrows-daily-note/Release%20Build?logo=github&style=for-the-badge) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/frankolson/obsidian-tomorrows-daily-note?style=for-the-badge&sort=semver)
 
 An [Obsidian](https://obsidian.md/) plugin that creates tomorrows daily note for preemtive planning.
 
