@@ -1,4 +1,5 @@
 import { Plugin } from "obsidian";
+import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import { openTomorrowsDailyNote } from "./OpenTomorrowsDailyNote";
 
 export default class TomorrowsDailyNote extends Plugin {
@@ -9,7 +10,17 @@ export default class TomorrowsDailyNote extends Plugin {
     this.addCommand({
       id: 'create-tomorrows-daily-note',
       name: 'Open tomorrow\'s daily note',
-      callback: () => openTomorrowsDailyNote()
+      checkCallback: (checking: boolean) => {
+        if (appHasDailyNotesPluginLoaded()) {
+          if (!checking) {
+            openTomorrowsDailyNote()
+          }
+
+          return true
+        }
+
+        return false
+      }
     })
   }
 
