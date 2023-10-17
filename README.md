@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/frankolson/obsidian-tomorrows-daily-note/Build%20Obsidian%20Plugin?style=for-the-badge) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/frankolson/obsidian-tomorrows-daily-note?sort=semver&style=for-the-badge)
 
-An [Obsidian](https://obsidian.md/) plugin that creates tomorrows daily note for preemtive planning.
+An [Obsidian](https://obsidian.md/) plugin that creates tomorrow's daily note for preemtive planning.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ You can open tomorrow's daily note using the following command: `Tomorrow's Dail
 
 ## Installing
 
-Version [0.9.7 of Obsidian](https://forum.obsidian.md/t/obsidian-release-v0-9-7-insider-build/7628) let's you install this plugin from within the app.
+Version [0.9.7 of Obsidian](https://forum.obsidian.md/t/obsidian-release-v0-9-7-insider-build/7628) lets you install this plugin from within the app.
 
 You can find the most up-to-date guides for installation here: https://help.obsidian.md/Advanced+topics/Community+plugins
 
@@ -34,7 +34,7 @@ If you would like to contribute to the development of this plugin, please follow
 
 ## Donating
 
-I really enjoy building stuff. Sometimes for myself, sometimes for others. If you found this plugin useful and want to say thank, you can buy me a coffee:
+I really enjoy building stuff. Sometimes for myself, sometimes for others. If you found this plugin useful and want to say thanks, you can buy me a coffee:
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/willolson)
 
