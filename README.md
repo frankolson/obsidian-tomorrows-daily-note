@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/frankolson/obsidian-tomorrows-daily-note/Build%20Obsidian%20Plugin?style=for-the-badge) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/frankolson/obsidian-tomorrows-daily-note?sort=semver&style=for-the-badge)
 
-An [Obsidian](https://obsidian.md/) plugin that creates tomorrow's daily note for preemtive planning.
+An [Obsidian](https://obsidian.md/) plugin that creates tomorrow's daily note for preemptive planning.
 
 ## Requirements
 
