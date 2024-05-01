@@ -5,18 +5,19 @@ import {
   getDailyNote,
   createDailyNote
 } from 'obsidian-daily-notes-interface';
+import { openFile } from './utils';
 
-export async function openTomorrowsDailyNote(): Promise<void> {
+export async function openTomorrowsDailyNote(skipWeekends: boolean = false): Promise<void> {
   if (!appHasDailyNotesPluginLoaded()) {
     sendDisabledDailyNotesAlert()
 
     return
   }
 
-  const tomorrowsDailyNote = await getOrCreateTomorrowsDailyNote()
-  if (!tomorrowsDailyNote) { return }
+  const nextDailyNote = await getOrCreateNextDailyNote(skipWeekends)
+  if (!nextDailyNote) { return }
 
-  await openFile(tomorrowsDailyNote)
+  await openFile(nextDailyNote)
 }
 
 function sendDisabledDailyNotesAlert() {
@@ -29,14 +30,15 @@ function sendFailedDailyNotesAlert(error: Error) {
   console.error('failed to find your daily notes folder', error)
 }
 
-async function getOrCreateTomorrowsDailyNote(): Promise<TFile | void> {
+async function getOrCreateNextDailyNote(skipWeekends: boolean): Promise<TFile | void> {
   try {
-    let tomorrowsDailyNote = getTomorrowsDailyNote()
-    if (!tomorrowsDailyNote) {
-      tomorrowsDailyNote = await createDailyNote(getTomorrowsDate())
+    const nextDate = getNextDate(skipWeekends)
+    let nextDailyNote = getDailyNoteSafe(nextDate)
+    if (!nextDailyNote) {
+      nextDailyNote = await createDailyNote(nextDate)
     }
 
-    return tomorrowsDailyNote
+    return nextDailyNote
   } catch (err) {
     sendFailedDailyNotesAlert(err)
 
@@ -44,25 +46,35 @@ async function getOrCreateTomorrowsDailyNote(): Promise<TFile | void> {
   }
 }
 
-function getTomorrowsDailyNote(): TFile | void {
+function getNextDate(skipWeekends: boolean): moment.Moment {
+  let nextDate = window.moment().add(1, 'day')
+
+  if (skipWeekends && isWeekend(nextDate)) {
+    nextDate = getNextWeekday(nextDate)
+  }
+
+  return nextDate
+}
+
+function isWeekend(date: moment.Moment): boolean {
+  return date.isoWeekday() > 5
+}
+
+function getNextWeekday(date: moment.Moment): moment.Moment {
+  let nextDate = date
+  while (isWeekend(nextDate)) {
+    nextDate = nextDate.add(1, 'day')
+  }
+
+  return nextDate
+}
+
+function getDailyNoteSafe(date: moment.Moment): TFile | void {
   try {
-    return getDailyNote(
-      getTomorrowsDate(),
-      getAllDailyNotes()
-    )
+    return getDailyNote(date, getAllDailyNotes())
   } catch (err) {
     sendFailedDailyNotesAlert(err)
 
     return
   }
-}
-
-async function openFile(file: TFile): Promise<void> {
-  const { workspace } = window.app
-  const leaf = workspace.getUnpinnedLeaf()
-  await leaf.openFile(file, { active: true });
-}
-
-function getTomorrowsDate(): moment.Moment {
-  return window.moment().add(1, 'days')
 }
