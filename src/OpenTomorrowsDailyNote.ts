@@ -6,7 +6,7 @@ import {
   createDailyNote
 } from 'obsidian-daily-notes-interface';
 
-export async function openTomorrowsDailyNote(): Void {
+export async function openTomorrowsDailyNote(): Promise<void> {
   if (!appHasDailyNotesPluginLoaded()) {
     sendDisabledDailyNotesAlert()
 
@@ -29,7 +29,7 @@ function sendFailedDailyNotesAlert(error: Error) {
   console.error('failed to find your daily notes folder', error)
 }
 
-async function getOrCreateTomorrowsDailyNote(): TFile | Void {
+async function getOrCreateTomorrowsDailyNote(): Promise<TFile | void> {
   try {
     let tomorrowsDailyNote = getTomorrowsDailyNote()
     if (!tomorrowsDailyNote) {
@@ -44,7 +44,7 @@ async function getOrCreateTomorrowsDailyNote(): TFile | Void {
   }
 }
 
-function getTomorrowsDailyNote(): TFile | Void {
+function getTomorrowsDailyNote(): TFile | void {
   try {
     return getDailyNote(
       getTomorrowsDate(),
@@ -57,13 +57,12 @@ function getTomorrowsDailyNote(): TFile | Void {
   }
 }
 
-async function openFile(file): Void {
+async function openFile(file: TFile): Promise<void> {
   const { workspace } = window.app
   const leaf = workspace.getUnpinnedLeaf()
   await leaf.openFile(file, { active: true });
 }
 
-function getTomorrowsDate() {
-  const { moment } = window
-  return moment().add(1, 'days')
+function getTomorrowsDate(): moment.Moment {
+  return window.moment().add(1, 'days')
 }
