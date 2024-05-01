@@ -1,10 +1,20 @@
 import { Notice, Plugin } from "obsidian";
 import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import { openTomorrowsDailyNote } from "./OpenTomorrowsDailyNote";
+import { TomorrowsDailyNoteSettingTab } from "./settings";
+
+interface TomorrowsDailyNoteSettings {
+  skipWeekends: boolean;
+}
+
+const DEFAULT_SETTINGS: Partial<TomorrowsDailyNoteSettings> = {
+  skipWeekends: false
+}
 
 export default class TomorrowsDailyNote extends Plugin {
+  settings: TomorrowsDailyNoteSettings;
 
-  onload() {
+  async onload() {
     console.log("Loading plugin: Tomorrow's Daily Note")
 
     this.addCommand({
@@ -30,10 +40,22 @@ export default class TomorrowsDailyNote extends Plugin {
         this.alertUserToEnableDailyNotesPlugin()
       }
     })
+
+    await this.loadSettings();
+
+    this.addSettingTab(new TomorrowsDailyNoteSettingTab(this.app, this));
   }
 
 	onunload() {
     console.log("Unloading plugin: Tomorrow's Daily Note")
+  }
+
+  async loadSettings() {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+  }
+
+  async saveSettings() {
+    await this.saveData(this.settings);
   }
 
   alertUserToEnableDailyNotesPlugin() {
