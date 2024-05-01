@@ -1,6 +1,10 @@
 import TomorrowsDailyNote from "./index";
 import { App, PluginSettingTab, Setting } from "obsidian";
 
+export interface TomorrowsDailyNoteSettings {
+  skipWeekends: boolean;
+}
+
 export class TomorrowsDailyNoteSettingTab extends PluginSettingTab {
   plugin: TomorrowsDailyNote;
 

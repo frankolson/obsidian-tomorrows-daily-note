@@ -1,11 +1,7 @@
 import { Notice, Plugin } from "obsidian";
 import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import { openTomorrowsDailyNote } from "./OpenTomorrowsDailyNote";
-import { TomorrowsDailyNoteSettingTab } from "./settings";
-
-interface TomorrowsDailyNoteSettings {
-  skipWeekends: boolean;
-}
+import { TomorrowsDailyNoteSettingTab, TomorrowsDailyNoteSettings } from "./settings";
 
 const DEFAULT_SETTINGS: Partial<TomorrowsDailyNoteSettings> = {
   skipWeekends: false
