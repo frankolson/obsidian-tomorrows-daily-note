@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-tomorrows-daily-note",
-	"version": "1.0.3",
+	"version": "1.1.0",
 	"description": "An obsidian plugin that creates tomorrows daily note for preemtive planning.",
 	"main": "main.js",
 	"scripts": {
