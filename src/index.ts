@@ -1,42 +1,45 @@
-import { Notice, Plugin } from "obsidian";
-import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
-import { openTomorrowsDailyNote } from "./OpenTomorrowsDailyNote";
+import { Plugin } from "obsidian";
+import { appHasDailyNotesPluginLoaded } from "obsidian-daily-notes-interface";
+import {
+  DEFAULT_SETTINGS,
+  TomorrowsDailyNoteSettingTab,
+  TomorrowsDailyNoteSettings
+} from "./settings";
+import { triggerDailyNotesDependencyNotice } from "./extensions/notice";
+import { CommandHandler } from "./handlers/command-handler";
+import { RibbonHandler } from "./handlers/ribbon-handler";
 
 export default class TomorrowsDailyNote extends Plugin {
+  settings: TomorrowsDailyNoteSettings;
+  commandHandler: CommandHandler;
+  ribbonHandler: RibbonHandler;
 
-  onload() {
+  async onload() {
     console.log("Loading plugin: Tomorrow's Daily Note")
 
-    this.addCommand({
-      id: 'create-tomorrows-daily-note',
-      name: 'Open tomorrow\'s daily note',
-      checkCallback: (checking: boolean) => {
-        if (!checking) {
-          if (appHasDailyNotesPluginLoaded()) {
-            openTomorrowsDailyNote()
-          } else {
-            this.alertUserToEnableDailyNotesPlugin()
-          }
-        }
+    await this.loadSettings()
 
-        return true
-      }
-    })
+    if (!appHasDailyNotesPluginLoaded()) {
+      triggerDailyNotesDependencyNotice();
+    }
+    
+    this.commandHandler = new CommandHandler(this)
+    this.ribbonHandler = new RibbonHandler(this)
 
-    this.addRibbonIcon('calendar-plus', 'Open tomorrow\'s daily note', () => {
-      if (appHasDailyNotesPluginLoaded()) {
-        openTomorrowsDailyNote()
-      } else {
-        this.alertUserToEnableDailyNotesPlugin()
-      }
-    })
+    this.commandHandler.setup()
+    this.ribbonHandler.setup()
   }
 
 	onunload() {
     console.log("Unloading plugin: Tomorrow's Daily Note")
   }
 
-  alertUserToEnableDailyNotesPlugin() {
-    new Notice('Please enable the Daily Notes plugin to use this feature.')
+  async loadSettings() {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.addSettingTab(new TomorrowsDailyNoteSettingTab(this.app, this));
+  }
+
+  async saveSettings() {
+    await this.saveData(this.settings);
   }
 }
