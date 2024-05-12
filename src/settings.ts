@@ -5,6 +5,10 @@ export interface TomorrowsDailyNoteSettings {
   skipWeekends: boolean;
 }
 
+export const DEFAULT_SETTINGS: Partial<TomorrowsDailyNoteSettings> = {
+  skipWeekends: false
+};
+
 export class TomorrowsDailyNoteSettingTab extends PluginSettingTab {
   plugin: TomorrowsDailyNote;
 

@@ -1,24 +1,33 @@
-import { Notice, Plugin } from "obsidian";
-import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
-import { openTomorrowsDailyNote } from "./noteOpener";
+import { Plugin } from "obsidian";
+import { appHasDailyNotesPluginLoaded } from "obsidian-daily-notes-interface";
 import {
+  DEFAULT_SETTINGS,
   TomorrowsDailyNoteSettingTab,
   TomorrowsDailyNoteSettings
 } from "./settings";
-
-const DEFAULT_SETTINGS: Partial<TomorrowsDailyNoteSettings> = {
-  skipWeekends: false
-}
+import { triggerDailyNotesDependencyNotice } from "./extensions/notice";
+import { CommandHandler } from "./handlers/command-handler";
+import { RibbonHandler } from "./handlers/ribbon-handler";
 
 export default class TomorrowsDailyNote extends Plugin {
   settings: TomorrowsDailyNoteSettings;
+  commandHandler: CommandHandler;
+  ribbonHandler: RibbonHandler;
 
   async onload() {
     console.log("Loading plugin: Tomorrow's Daily Note")
 
-    await this.initializeSettings()
-    this.registerCommands()
-    this.registerRibbonIcon()
+    await this.loadSettings()
+
+    if (!appHasDailyNotesPluginLoaded()) {
+      triggerDailyNotesDependencyNotice();
+    }
+    
+    this.commandHandler = new CommandHandler(this)
+    this.ribbonHandler = new RibbonHandler(this)
+
+    this.commandHandler.setup()
+    this.ribbonHandler.setup()
   }
 
 	onunload() {
@@ -27,46 +36,10 @@ export default class TomorrowsDailyNote extends Plugin {
 
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.addSettingTab(new TomorrowsDailyNoteSettingTab(this.app, this));
   }
 
   async saveSettings() {
     await this.saveData(this.settings);
-  }
-
-  private async initializeSettings() {
-    await this.loadSettings();
-    this.addSettingTab(new TomorrowsDailyNoteSettingTab(this.app, this));
-  }
-
-  private registerCommands() {
-    this.addCommand({
-      id: 'create-tomorrows-daily-note',
-      name: 'Open tomorrow\'s daily note',
-      checkCallback: (checking: boolean) => {
-        if (!checking) {
-          if (appHasDailyNotesPluginLoaded()) {
-            openTomorrowsDailyNote(this.settings.skipWeekends)
-          } else {
-            this.alertUserToEnableDailyNotesPlugin()
-          }
-        }
-
-        return true
-      }
-    })
-  }
-
-  private registerRibbonIcon() {
-    this.addRibbonIcon('calendar-plus', 'Open tomorrow\'s daily note', () => {
-      if (appHasDailyNotesPluginLoaded()) {
-        openTomorrowsDailyNote()
-      } else {
-        this.alertUserToEnableDailyNotesPlugin()
-      }
-    })
-  }
-
-  private alertUserToEnableDailyNotesPlugin() {
-    new Notice('Please enable the Daily Notes plugin to use this feature.')
   }
 }
