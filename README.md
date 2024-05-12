@@ -11,9 +11,17 @@ An [Obsidian](https://obsidian.md/) plugin that creates tomorrow's daily note fo
 
 ## Usage
 
-You can open tomorrow's daily note using the following command: `Tomorrow's Daily Note: Open tomorrow's daily note`
+You can open tomorrow's daily note using ribbon icon or the following command: `Tomorrow's Daily Note: Open tomorrow's daily note`
 
-![Mind Map Preview Command](/docs/images/open-tomorrows-daily-note-command-preview.png)
+![Tomorrow's Daily Note Preview](/docs/images/plugin-preview.png)
+
+### Settings
+
+You can configure the following settings from the plugin settings menu:
+
+- **Skip Weekends**: If enabled, the plugin will skip weekends when creating tomorrow's daily note.
+
+![Tomorrow's Daily Note Settings](/docs/images/settings-preview.png)
 
 ## Installing
 
