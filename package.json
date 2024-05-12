@@ -4,8 +4,8 @@
 	"description": "An obsidian plugin that creates tomorrows daily note for preemtive planning.",
 	"main": "main.js",
 	"scripts": {
-		"dev": "node esbuild.config.mjs",
-		"build": "node esbuild.config.mjs production",
+		"dev": "obsidian-plugin dev src/index.ts",
+		"build": "obsidian-plugin build src/index.ts",
 		"test": "jest tests/"
 	},
 	"keywords": [],
@@ -23,6 +23,7 @@
 		"jest-environment-jsdom": "^29.7.0",
 		"obsidian": "^1.5.7-1",
 		"obsidian-daily-notes-interface": "^0.9.4",
+		"obsidian-plugin-cli": "^0.9.0",
 		"ts-jest": "^29.1.2",
 		"tslib": "2.3.1",
 		"typescript": "4.4.4"
