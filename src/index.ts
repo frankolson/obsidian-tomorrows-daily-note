@@ -18,16 +18,13 @@ export default class TomorrowsDailyNote extends Plugin {
     console.log("Loading plugin: Tomorrow's Daily Note")
 
     await this.loadSettings()
-
-    if (!appHasDailyNotesPluginLoaded()) {
-      triggerDailyNotesDependencyNotice();
-    }
     
     this.commandHandler = new CommandHandler(this)
     this.ribbonHandler = new RibbonHandler(this)
-
-    this.commandHandler.setup()
-    this.ribbonHandler.setup()
+    this.triggerDependencyCheck(() => {
+      this.commandHandler.setup()
+      this.ribbonHandler.setup()
+    })
   }
 
 	onunload() {
@@ -41,5 +38,16 @@ export default class TomorrowsDailyNote extends Plugin {
 
   async saveSettings() {
     await this.saveData(this.settings);
+  }
+
+  triggerDependencyCheck(callback: () => void) {
+    this.app.workspace.onLayoutReady(() => {
+      console.log("Checking for Daily Notes plugin")
+      if (!appHasDailyNotesPluginLoaded()) {
+        triggerDailyNotesDependencyNotice();
+      }
+
+      callback()
+    })
   }
 }
