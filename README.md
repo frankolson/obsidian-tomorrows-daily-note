@@ -40,6 +40,15 @@ Pull requests are both welcome and appreciated.
 
 If you would like to contribute to the development of this plugin, please follow the guidelines provided in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+### Deployment
+
+1. Bump the version in `manifest.json` and the `package.json` files.
+2. Create a new release on GitHub with the version number as the tag: `git tag -a <version number> -m "<version number>"`
+3. Push the tag: `git push origin <version number>`
+4. The release will be automatically built and deployed by GitHub Actions, and you can check the progress in the repository's [Actions tab](https://github.com/frankolson/obsidian-tomorrows-daily-note/actions).
+5. Then go add release notes to the newly created draft release in the repository's [Releases tab](https://github.com/frankolson/obsidian-tomorrows-daily-note/releases).
+6. Once you're happy with the release notes, click the "Publish release" button.
+
 ## Donating
 
 I really enjoy building stuff. Sometimes for myself, sometimes for others. If you found this plugin useful and want to say thanks, you can buy me a coffee:
