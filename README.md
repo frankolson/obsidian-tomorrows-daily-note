@@ -20,6 +20,7 @@ You can open tomorrow's daily note using ribbon icon or the following command: `
 You can configure the following settings from the plugin settings menu:
 
 - **Skip Weekends**: If enabled, the plugin will skip weekends when creating tomorrow's daily note.
+- **Show icon in sidebar**: If enabled, the plugin will show an icon in the sidebar for easy access to tomorrow's daily note.
 
 ![Tomorrow's Daily Note Settings](/docs/images/settings-preview.png)
 
