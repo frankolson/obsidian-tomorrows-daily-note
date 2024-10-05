@@ -54,8 +54,10 @@ If you would like to contribute to the development of this plugin, please follow
 
 ## Donating
 
-I really enjoy building stuff. Sometimes for myself, sometimes for others. If you found this plugin useful and want to say thanks, you can buy me a coffee:
+I really enjoy building stuff. Sometimes for myself, sometimes for others. If have been helped by this plugin and wish to support it, please see the following link:
 
-[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/willolson)
+https://github.com/sponsors/frankolson
+
+Donations will go towards my computing costs, licenses for development tools, and the time I spend developing and supporting this plugin.
 
 Thank you!
