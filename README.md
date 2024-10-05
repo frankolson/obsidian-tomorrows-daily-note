@@ -4,6 +4,8 @@
 
 An [Obsidian](https://obsidian.md/) plugin that creates tomorrow's daily note for preemptive planning.
 
+See the [changelog](/CHANGELOG.md) for the latest changes and updates.
+
 ## Requirements
 
 - Obsidian **v0.12.0+**.
