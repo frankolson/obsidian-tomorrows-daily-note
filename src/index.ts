@@ -29,6 +29,7 @@ export default class TomorrowsDailyNote extends Plugin {
 
 	onunload() {
     console.log("Unloading plugin: Tomorrow's Daily Note")
+    this.commandHandler.tearDown()
   }
 
   async loadSettings() {
