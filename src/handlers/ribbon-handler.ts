@@ -1,3 +1,4 @@
+import { Platform } from "obsidian";
 import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import TomorrowsDailyNote from "src";
 import { triggerDailyNotesDependencyNotice } from 'src/extensions/notice';
@@ -23,12 +24,14 @@ export class RibbonHandler {
       .addRibbonIcon(
         'calendar-plus',
         'Open tomorrow\'s daily note',
-        async () => {
+        async (event: MouseEvent) => {
           if (!appHasDailyNotesPluginLoaded()) {
             triggerDailyNotesDependencyNotice();
             return;
           } else {
-            await openNextDailyNote(this.plugin.settings.skipWeekends);
+            const metaKey = Platform.isMacOS ? event.metaKey : event.ctrlKey;
+            const newTab = event.button === 1 || metaKey;
+            await openNextDailyNote(this.plugin.settings.skipWeekends, newTab);
           }
         }
       )
