@@ -9,6 +9,7 @@ export class RibbonHandler {
 
   constructor(plugin: TomorrowsDailyNote) {
     this.plugin = plugin;
+    this.setup();
   }
 
   setup() {
