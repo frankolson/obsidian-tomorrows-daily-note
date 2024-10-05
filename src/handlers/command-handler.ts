@@ -8,6 +8,7 @@ export class CommandHandler {
 
   constructor(plugin: TomorrowsDailyNote) {
     this.plugin = plugin;
+    this.setup();
   }
 
   setup() {
