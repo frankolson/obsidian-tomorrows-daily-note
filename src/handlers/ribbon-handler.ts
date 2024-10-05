@@ -1,7 +1,5 @@
 import { Platform } from "obsidian";
-import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import TomorrowsDailyNote from "src";
-import { triggerDailyNotesDependencyNotice } from 'src/extensions/notice';
 import { openNextDailyNote } from 'src/extensions/daily-notes';
 
 export const RIBBON_ICON_ID = 'tomorrows-daily-note-ribbon-icon';
@@ -25,14 +23,10 @@ export class RibbonHandler {
         'calendar-plus',
         'Open tomorrow\'s daily note',
         async (event: MouseEvent) => {
-          if (!appHasDailyNotesPluginLoaded()) {
-            triggerDailyNotesDependencyNotice();
-            return;
-          } else {
-            const metaKey = Platform.isMacOS ? event.metaKey : event.ctrlKey;
-            const newTab = event.button === 1 || metaKey;
-            await openNextDailyNote(this.plugin.settings.skipWeekends, newTab);
-          }
+          await openNextDailyNote(
+            this.plugin.settings.skipWeekends,
+            this.useNewTab(event)
+          );
         }
       )
       .setAttribute("id", RIBBON_ICON_ID)
@@ -42,5 +36,10 @@ export class RibbonHandler {
     document
       .getElementById(RIBBON_ICON_ID)
       ?.remove();
+  }
+
+  useNewTab(event: MouseEvent): boolean {
+    const systemMetaKey = Platform.isMacOS ? event.metaKey : event.ctrlKey;
+    return event.button === 1 || systemMetaKey;
   }
 }

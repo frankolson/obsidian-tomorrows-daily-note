@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Middle mouse button click and meta + click of the ribbon icon open links in new tab
+- Meta + enter of the command palette item opens the item in a new tab

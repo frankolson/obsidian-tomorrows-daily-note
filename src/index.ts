@@ -13,6 +13,7 @@ export default class TomorrowsDailyNote extends Plugin {
   settings: TomorrowsDailyNoteSettings;
   commandHandler: CommandHandler;
   ribbonHandler: RibbonHandler;
+  cmdPressed: boolean = false;
 
   async onload() {
     console.log("Loading plugin: Tomorrow's Daily Note")
@@ -29,6 +30,7 @@ export default class TomorrowsDailyNote extends Plugin {
 
 	onunload() {
     console.log("Unloading plugin: Tomorrow's Daily Note")
+    this.commandHandler.tearDown()
   }
 
   async loadSettings() {
