@@ -13,9 +13,7 @@ export class RibbonHandler {
   }
 
   setup() {
-    if (this.plugin.settings.enableRibbonIcon) {
-      this.addRibbonIcon();
-    }
+    this.addRibbonIcon();
   }
 
   addRibbonIcon() {

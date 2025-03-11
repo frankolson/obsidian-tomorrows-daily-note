@@ -15,7 +15,6 @@ export default class TomorrowsDailyNote extends Plugin {
   ribbonHandler: RibbonHandler;
 
   async onload() {
-
     await this.loadSettings()
     
     this.commandHandler = new CommandHandler(this)
