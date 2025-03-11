@@ -1,12 +1,13 @@
 {
 	"name": "obsidian-tomorrows-daily-note",
-	"version": "1.2.1",
+	"version": "1.3.0",
 	"description": "An obsidian plugin that creates tomorrows daily note for preemtive planning.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "obsidian-plugin dev src/index.ts",
 		"build": "obsidian-plugin build src/index.ts",
-		"test": "jest tests/"
+		"test": "jest tests/",
+		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [],
 	"author": "",
