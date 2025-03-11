@@ -22,10 +22,10 @@ export class RibbonHandler {
         'calendar-plus',
         'Open tomorrow\'s daily note',
         async (event: MouseEvent) => {
-          await openNextDailyNote(
-            this.plugin.settings.skipWeekends,
-            this.useNewTab(event)
-          );
+          await openNextDailyNote({
+            skipWeekends: this.plugin.settings.skipWeekends,
+            newTab: this.useNewTab(event)
+          });
         }
       )
       .setAttribute("id", RIBBON_ICON_ID)
