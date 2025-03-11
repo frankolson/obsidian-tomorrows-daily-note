@@ -9,12 +9,11 @@ export class RibbonHandler {
 
   constructor(plugin: TomorrowsDailyNote) {
     this.plugin = plugin;
+    this.setup();
   }
 
   setup() {
-    if (this.plugin.settings.enableRibbonIcon) {
-      this.addRibbonIcon();
-    }
+    this.addRibbonIcon();
   }
 
   addRibbonIcon() {
