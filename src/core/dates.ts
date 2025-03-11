@@ -8,10 +8,6 @@ export function getNextDailyNoteDate(options?: GetNextDailyNoteDateOptions): mom
   let daysRemaining = offset
   let newDate = window.moment().clone()
 
-  // if (skipWeekends && isWeekend(nextDate)) {
-  //   nextDate = getNextWeekday(nextDate)
-  // }
-
   while (daysRemaining > 0) {
     newDate = newDate.add(1, 'day')
     if (skipWeekends && isWeekend(newDate)) {
