@@ -8,10 +8,17 @@ import {
 import { getNextDailyNoteDate } from '../core/dates';
 import { triggerDailyNotesDependencyNotice } from './notice';
 
-export async function openNextDailyNote(skipWeekends: boolean, newTab: boolean = false): Promise<void> {
+interface OpenNextDailyNoteOptions {
+  skipWeekends: boolean;
+  newTab: boolean;
+  offset?: number;
+}
+
+export async function openNextDailyNote(options: OpenNextDailyNoteOptions): Promise<void> {
+  const { skipWeekends, newTab, offset } = options;
   if (!validateDailyNotesPluginLoaded()) return;
 
-  const date = getNextDailyNoteDate(skipWeekends);
+  const date = getNextDailyNoteDate({ skipWeekends, offset });
   const note = await getOrCreateNextDailyNote(date)
   
   if (note) openNote(note, newTab);

@@ -1,11 +1,26 @@
-export function getNextDailyNoteDate(skipWeekends: boolean): moment.Moment {
-  let nextDate = window.moment().add(1, 'day')
+interface GetNextDailyNoteDateOptions {
+  skipWeekends?: boolean
+  offset?: number
+}
 
-  if (skipWeekends && isWeekend(nextDate)) {
-    nextDate = getNextWeekday(nextDate)
+export function getNextDailyNoteDate(options?: GetNextDailyNoteDateOptions): moment.Moment {
+  const { skipWeekends = false, offset = 1 } = options || {}
+  let daysRemaining = offset
+  let newDate = window.moment().clone()
+
+  // if (skipWeekends && isWeekend(nextDate)) {
+  //   nextDate = getNextWeekday(nextDate)
+  // }
+
+  while (daysRemaining > 0) {
+    newDate = newDate.add(1, 'day')
+    if (skipWeekends && isWeekend(newDate)) {
+      continue
+    }
+    daysRemaining--
   }
 
-  return nextDate
+  return newDate
 }
 
 export function isWeekend(date: moment.Moment): boolean {
